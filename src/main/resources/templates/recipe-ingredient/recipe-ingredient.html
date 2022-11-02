@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card card-width">
+                    <div class="card-header bg-success text-white">
+                        <h4>Recipe Ingredient</h4>
+                    </div>
+
+                    <div th:if="${recipeIngredient eq null}">
+                        Recipe Ingredient Not Found
+                    </div>
+
+                    <div th:unless="${recipeIngredient eq null}" class="card-body">
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Id :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeIngredient.id}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Ingredient :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeIngredient.ingredient.getIngredientName()}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Amount :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeIngredient.amount}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Unit :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeIngredient.measurement}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Recipe :</h5></span>
+                            </div>
+                            <div th:if="${recipeIngredient.recipe eq null}">
+                                <a href="#" class="btn btn-outline-success btn-link:hover" th:href="@{/recipe-ingredient/add-recipe/{id} (id=${recipeIngredient.id})}">
+                                    <span>Add Recipe</span>
+                                </a>
+                            </div>
+                            <div th:unless="${recipeIngredient.recipe eq null}">
+                                <span th:text="${recipeIngredient.recipe.recipeName}" class="pe-5"></span>
+                                <a href="#" class="btn btn-outline-danger btn-link:hover" th:href="@{/recipe-ingredient/remove-recipe/{id} (id=${recipeIngredient.id})}">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Remove Recipe</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-outline-info mt-3" th:href="@{/recipe-ingredient/update/{id} (id=${recipeIngredient.id})}">
+                                <i class="fas fa-pen-to-square"></i>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary mt-3" th:href="@{/recipe-ingredient/list}">
+                                <i class="fa fa-arrow-left"></i>
+                                <span class="d-none d-md-inline">Back</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col">
+                <p>Pictures of ingredients</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+</body>
+</html>

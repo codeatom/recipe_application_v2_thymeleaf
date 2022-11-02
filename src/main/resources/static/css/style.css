@@ -1,0 +1,26 @@
+
+.error{
+    color: red;
+}
+
+.fix-login-btn {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    padding-top: 10px;
+    padding-right: 240px;
+
+}
+
+.pad-logo-right{
+    padding-right: 3000px;
+}
+
+.card-div {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.card-width {
+    width: 50rem;
+}

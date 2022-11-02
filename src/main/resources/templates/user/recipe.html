@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+  <div class="container">
+
+    <!-- outer row 1 -->
+    <div class="row">
+      <header class="pt-4 ">
+        <h2>
+          <span th:text="${recipe.recipeName}">Ingredient</span>
+        </h2>
+      </header>
+    </div>
+
+    <!-- outer row 2 -->
+    <div class="row">
+      <!-- outer row 2's outer col 1 -->
+      <div class="col-4">
+
+        <!-- outer row 2's outer col 1's inner row 1 -->
+        <div class="row">
+          <div class="col">
+            <img src="images/logo.png" alt="place picture image here" />
+            <br>
+            <br>
+            <br>
+          </div>
+        </div>
+
+        <!-- outer row 2's outer col 1's inner row 2 -->
+        <div class="row">
+          <div class="card mb-3 mt-3 card-div">
+            <div class="card-body">
+              <table class="table table-hover mt-3">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Ingredient</th>
+                  <th>Amount</th>
+                  <th>Measurement</th>
+                  <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr th:if="${recipe.recipeIngredients == null || recipe.recipeIngredients.isEmpty()}">
+                  <td colspan="4">No Record Available</td>
+                </tr>
+
+                <tr th:unless="${recipe.recipeIngredients == null || recipe.recipeIngredients.isEmpty()}" th:each="recipeIngredient, iter : ${recipe.recipeIngredients}">
+                  <th scope="row" th:text="${iter.index+1}"> 1 </th>
+                  <td th:text="${recipeIngredient.getIngredient().getIngredientName()}"></td>
+                  <td th:text="${recipeIngredient.amount}"></td>
+                  <td th:text="${recipeIngredient.measurement}"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- outer row 2's  outer col 2 -->
+      <div class="col-8">
+
+        <!-- outer row 2's outer col 2's inner row 1 -->
+        <div class="row">
+          <div class="card mb-3 mt-3 card-div">
+            <div class="card-body">
+              <h5>This recipe is:</h5>
+              <div th:if="${recipe.categories == null || recipe.categories.isEmpty()}">
+                <p colspan="4">No Category Available</p>
+              </div>
+
+              <div th:unless="${recipe.categories == null || recipe.categories.isEmpty()}" th:each="category : ${recipe.categories}">
+                <p th:text="${category.category}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- outer row 2's outer col 2's inner row 2 -->
+        <div class="row">
+          <div class="card mt-3 mb-3 card-div card-width">
+            <div class="card-body">
+              <h4>Directions</h4>
+              <p th:text="${recipe.instruction.instruction}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
+</body>
+</html>

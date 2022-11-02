@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+<div class="container">
+
+    <!--  outer row 1 for header -->
+    <div class="row">
+        <div class="col-6">
+            <header align="center" class="pt-5">
+                <h2>
+                    <span th:text="#{recipes.header}">recipes</span>
+                </h2>
+            </header>
+        </div>
+        <div class="col-4">
+            <header align="center" class="pt-5">
+                <h2>
+                    <span th:text="#{recipe.info}">info</span>
+                </h2>
+            </header>
+        </div>
+        <div class="col-2">
+            <form th:action="@{/recipe/search}" class="d-flex dark pt-3" role="search">
+                <input type="text" th:name="search" class="form-control me-2"  placeholder="Search recipe" aria-label="Search">
+                <button class="btn btn-info" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!--  outer row 2 for add button -->
+    <div class="row">
+        <div class="col">
+            <a th:href="@{/recipe/add}" href="#" class="btn btn-success" >
+                <i class="fas fa-plus"></i>
+                <span>Add</span>
+            </a>
+        </div>
+    </div>
+
+    <!--  outer row 3 for main content-->
+    <div class="row">
+        <div class="col">
+            <!-- Start of Table -->
+                    <table class="table table-hover mt-3">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Recipe</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:if="${recipeList == null || recipeList.isEmpty()}">
+                            <td colspan="4">No Record Available</td>
+                        </tr>
+
+                        <tr th:unless="${recipeList == null || recipeList.isEmpty()}" th:each="recipe, iter : ${recipeList}">
+                            <th scope="row" th:text="${iter.index+1}"> 1 </th>
+                            <td th:text="${recipe.recipeName}"></td>
+                            <td>
+                                <!-- Details link -->
+                                <a href="#" class="btn btn-link:hover link-primary" th:href="@{/recipe/get/{id} (id=${recipe.id})}">
+                                    <i class="fas fa-circle-info"></i>
+                                    <span class="d-none d-md-inline">Details</span>
+                                </a>
+
+                                <!--Edit link -->
+                                <a href="#" class="btn btn-link:hover link-info" th:href="@{/recipe/update/{id} (id=${recipe.id})}">
+                                    <i class="fas fa-pen-to-square"></i>
+                                    <span class="d-none d-md-inline">Edit</span>
+                                </a>
+
+                                <!--Delete link -->
+                                <a href="#" class="btn btn-link:hover link-danger" th:href="@{/recipe/delete/request/{id} (id=${recipe.id})}">
+                                    <i class="fas fa-trash"></i>
+                                    <span class="d-none d-md-inline">Delete</span>
+                                </a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                <!-- End of Table -->
+                <div>
+                    <h5 class="m-0" th:text="|Total Recipe: ${recipeList.size()}|">Total Recipe: 3</h5>
+                </div>
+        </div>
+
+        <div class="col">
+            <div class="text-center">
+                <p>Pictures of recipes</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
+</body>
+</html>

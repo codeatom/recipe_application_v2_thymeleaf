@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <header class="mt-5 pt-5">
+          <h2>
+            <span th:text="#{recipeCategory.add}">Adding Recipe Category To Recipe</span>
+          </h2>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card mb-3">
+          <div class="card-body ">
+
+            <form th:action="@{/recipe/add-recipe-category}" th:object="${recipeCategoryForm}" method="post">
+              <div class="form-group visually-hidden">
+                <input th:field="*{id}" id="id" name="id" type="number"/>
+              </div>
+              <div class="form-group">
+                <label for="recipeCategoryId"><h5>Recipe Category :</h5></label>
+                <select th:field="*{recipeCategoryId}" id="recipeCategoryId" name="recipeCategoryId" class="form-control">
+                  <option th:each="recipeCategory : ${recipeCategoryList}" th:value="${recipeCategory.id}" th:text="${recipeCategory.category}"></option>
+                </select>
+              </div>
+
+              <div>
+                <button type="submit" class="btn btn-primary mt-3">
+                  <i class="fa-solid fa-check"></i>
+                  <span class="d-none d-md-inline">Add</span>
+                </button>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+
+</html>

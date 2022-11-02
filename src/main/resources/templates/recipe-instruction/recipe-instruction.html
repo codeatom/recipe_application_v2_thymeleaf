@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4>Recipe Instruction</h4>
+                    </div>
+
+                    <div th:if="${recipeInstruction eq null}">
+                        Data not found
+                    </div>
+
+                    <div th:unless="${recipeInstruction eq null}" class="card-body">
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Id :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeInstruction.id}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Title :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeInstruction.title}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Instructions :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeInstruction.instruction}"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-outline-info mt-3" th:href="@{/recipe-instruction/update/{id} (id=${recipeInstruction.id})}">
+                                <i class="fas fa-pen-to-square"></i>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary mt-3" th:href="@{/recipe-instruction/list}">
+                                <i class="fa fa-arrow-left"></i>
+                                <span class="d-none d-md-inline">Back</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-4">
+                <p>Pictures of ingredients</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+</body>
+</html>

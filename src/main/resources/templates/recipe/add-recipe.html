@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <header class="mt-5 pt-5">
+          <h2>
+            <span th:text="#{recipe.add}">Adding Recipe</span>
+          </h2>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card mb-3 card-width">
+          <div class="card-body ">
+
+              <form th:action="@{/recipe/add}" th:object="${recipe}" method="post">
+                <div class="form-group mt-3">
+                  <label for="recipeName"><h5>Recipe Name: </h5></label>
+                  <input th:field="*{recipeName}" id="recipeName" name="recipeName" type="text" placeholder="Enter Recipe Name" class="form-control"/>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('recipeName')}" th:errors="*{recipeName}" th:errorclass="error">validation message</p>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="instructionTitle"><h5>Instruction Title: </h5></label>
+                  <input th:field="*{instructionTitle}" id="instructionTitle" name="instructionTitle" type="text" placeholder="Enter Instruction Title" class="form-control"/>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('instructionTitle')}" th:errors="*{instructionTitle}" th:errorclass="error">validation message</p>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="instructionDetail"><h5>Instruction Detail: </h5></label>
+                  <input th:field="*{instructionDetail}" id="instructionDetail" name="instructionDetail" type="text" placeholder="Enter Instruction Detail" class="form-control"/>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('instructionDetail')}" th:errors="*{instructionDetail}" th:errorclass="error">validation message</p>
+                </div>
+                <div class="visually-hidden">
+                  <input th:value="${1}" id="instructionId" name="instructionId" type="number"/>
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-primary mt-3">
+                    <i class="fa-solid fa-check"></i>
+                    <span class="d-none d-md-inline">Add</span>
+                  </button>
+                  <button type="reset" class="btn btn-warning mt-3">
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                    <span class="d-none d-md-inline">Reset</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-outline-primary mt-2" th:href="@{/recipe/list}">
+          <i class="fa fa-times"></i>
+          <span class="d-none d-md-inline">Cancel</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+
+</html>

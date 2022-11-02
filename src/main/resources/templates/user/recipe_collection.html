@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+        <!-- row 1 -->
+        <div class="row">
+            <header align="center" class="mt-5 pt-5">
+                <h2><span th:text="#{user.recipes.header}">All Recipes</span></h2>
+                <hr>
+            </header>
+        </div>
+
+        <!-- row 2 -->
+        <div class="row">
+            <div th:if="${recipeList == null || recipeList.isEmpty()}">
+                <td colspan="4">No Record Available</td>
+            </div>
+        </div>
+
+        <!-- row 3 -->
+        <div class="row">
+            <div th:unless="${recipeList == null || recipeList.isEmpty()}" th:each="recipe : ${recipeList}">
+                <div class="card mb-3 card-div">
+                    <div class="card-body">
+                        <a href="#" class="btn btn-link:hover link-primary" th:href="@{/user/get/{id} (id=${recipe.id})}">
+                            <span th:text="${recipe.recipeName}" class="d-none d-md-inline">Recipe name</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+</body>
+</html>

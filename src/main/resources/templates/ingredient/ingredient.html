@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col">
+                <div class="card card-width">
+                    <div class="card-header bg-success text-white">
+                        <h4>Ingredient</h4>
+                    </div>
+
+                    <div th:if="${ingredient eq null}">
+                        Ingredient Not Found
+                    </div>
+
+                    <div th:unless="${ingredient eq null}" class="card-body">
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>ID :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${ingredient.id}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm">
+                                <span><h5>Ingredient :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${ingredient.ingredientName}"></span>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-outline-info mt-3" th:href="@{/ingredient/update/{id} (id=${ingredient.id})}">
+                            <i class="fas fa-pen-to-square"></i>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary mt-3" th:href="@{/ingredient/list}">
+                            <i class="fa fa-arrow-left"></i>
+                            <span class="d-none d-md-inline">Back</span>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col">
+                <p>Picture of ingredients</p>
+                <p>Instruction on ingredients is placed here</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+</body>
+</html>

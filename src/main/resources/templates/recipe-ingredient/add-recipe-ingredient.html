@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <header class="mt-5 pt-5">
+          <h2>
+            <span th:text="#{recipeIngredient.add}">Adding RecipeIngredient</span>
+          </h2>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card mb-3 card-width">
+          <div class="card-body ">
+
+              <form th:action="@{/recipe-ingredient/add}" th:object="${recipeIngredient}" method="post">
+                <div class="form-group">
+                  <label for="ingredientId"><h5>Ingredient :</h5></label>
+                  <select th:field="*{ingredientId}" id="ingredientId" name="ingredientId" class="form-control">
+                    <option th:each="ingredient : ${ingredientList}" th:value="${ingredient.id}" th:text="${ingredient.ingredientName}"></option>
+                  </select>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="amount"><h5>Amount :</h5></label>
+                  <input th:field="*{amount}" id="amount" name="amount" type="number" placeholder="Enter amount" class="form-control"/>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}" th:errorclass="error">validation message</p>
+                </div>
+                <div class="form-group mt-3">
+                  <label for="measurement"><h5>Measurement :</h5></label>
+                  <select th:field="*{measurement}" id="measurement" name="measurement" class="form-control">
+                    <option th:value="TBSP" th:text="TBSP"></option>
+                    <option th:value="TSP" th:text="TSP"></option>
+                    <option th:value="G" th:text="G"></option>
+                    <option th:value="HG" th:text="HG"></option>
+                    <option th:value="KG" th:text="KG"></option>
+                    <option th:value="ML" th:text="ML"></option>
+                    <option th:value="CL" th:text="CL"></option>
+                    <option th:value="DL" th:text="DL"></option>
+                  </select>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('measurement')}" th:errors="*{measurement}" th:errorclass="error">validation message</p>
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-primary mt-3">
+                    <i class="fa-solid fa-check"></i>
+                    <span class="d-none d-md-inline">Add</span>
+                  </button>
+                  <button type="reset" class="btn btn-warning mt-3">
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                    <span class="d-none d-md-inline">Reset</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-outline-primary mt-2" th:href="@{/recipe-ingredient/list}">
+          <i class="fa fa-times"></i>
+          <span class="d-none d-md-inline">Cancel</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+
+</html>

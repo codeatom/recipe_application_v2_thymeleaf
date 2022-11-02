@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card card-width">
+                    <div class="card-header bg-success text-white">
+                        <h4>Recipe</h4>
+                    </div>
+
+                    <div th:if="${recipe eq null}">
+                        Data not found
+                    </div>
+
+                    <div th:unless="${recipe eq null}" class="card-body">
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Id :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipe.id}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Recipe :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipe.recipeName}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Instructions :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipe.getInstruction().instruction}"></span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <a href="#" class="btn btn-link:hover link-success mt-3" th:href="@{/recipe/add-recipe-ingredient/{id} (id=${recipe.id})}">
+                                <i class="fas fa-plus"></i>
+                                <span class="d-none d-md-inline">Add Recipe Ingredient</span>
+                            </a>
+                            <a href="#" class="btn btn-link:hover link-success mt-3" th:href="@{/recipe/add-recipe-category/{id} (id=${recipe.id})}">
+                                <i class="fas fa-plus"></i>
+                                <span class="d-none d-md-inline">Add Category</span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-outline-info mt-3" th:href="@{/recipe/update/{id} (id=${recipe.id})}">
+                                <i class="fas fa-pen-to-square"></i>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary mt-3" th:href="@{/recipe/list}">
+                                <i class="fa fa-arrow-left"></i>
+                                <span class="d-none d-md-inline">Back</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="row">
+                    <p>Pictures of ingredients</p>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <table class="table table-hover mt-3">
+                            <thead class="table-info">
+                            <tr>
+                                <th>#</th>
+                                <th>Ingredient</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:if="${recipe.recipeIngredients == null || recipe.recipeIngredients.isEmpty()}">
+                                <td colspan="4">No Record Available</td>
+                            </tr>
+
+                            <tr th:unless="${recipe.recipeIngredients == null || recipe.recipeIngredients.isEmpty()}" th:each="recipeIngredient, iter : ${recipe.recipeIngredients}">
+                                <th scope="row" th:text="${iter.index+1}"> 1 </th>
+                                <td th:text="${recipeIngredient.getIngredient().getIngredientName()}"></td>
+                                <td>
+                                    <a href="#" class="btn btn-link:hover link-danger" th:href="@{/recipe/remove-recipe-ingredient/{id}/{id2} (id=${recipe.id}, id2=${recipeIngredient.id})}">
+                                        <i class="fas fa-trash"></i>
+                                        <span class="d-none d-md-inline">Remove</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col">
+                        <table class="table table-hover mt-3">
+                            <thead class="table-info">
+                            <tr>
+                                <th>#</th>
+                                <th>Category</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr th:if="${recipe.categories == null || recipe.categories.isEmpty()}">
+                                <td colspan="4">No Record Available</td>
+                            </tr>
+
+                            <tr th:unless="${recipe.categories == null || recipe.categories.isEmpty()}" th:each="recipeCategory, iter : ${recipe.categories}">
+                                <th scope="row" th:text="${iter.index+1}"> 1 </th>
+                                <td th:text="${recipeCategory.category}">Vegetarian</td>
+                                <td>
+                                    <a href="#" class="btn btn-link:hover link-danger" th:href="@{/recipe/remove-recipe-category/{id}/{id2} (id=${recipe.id}, id2=${recipeCategory.id})}">
+                                        <i class="fas fa-trash"></i>
+                                        <span class="d-none d-md-inline">Remove</span>
+                                    </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+</body>
+</html>

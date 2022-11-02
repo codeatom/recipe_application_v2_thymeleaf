@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <title>nav_fragment</title>
+</head>
+
+<body>
+<nav th:fragment="nav_fragment" class="navbar navbar-expand-lg navbar-dark bg-success">
+  <div class="container">
+
+    <div class="row">
+      <!-- col 1 -->
+      <div class="col-1">
+        <a th:href="@{/home/index}" href="#" class="nav-link active pad-logo-right">
+           <img src="../images/logo.png" alt="Home" />
+        </a>
+      </div>
+
+      <!-- col 2 -->
+      <div class="col-10">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/ingredient/list}" href="#" class="nav-link active">Ingredients</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/recipe-ingredient/list}" href="#" class="nav-link active">RecipeIngredients</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/recipe-instruction/list}" href="#" class="nav-link active">Instructions</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/recipe-category/list}" href="#" class="nav-link active">Categories</a>
+          </li>
+          <li sec:authorize="isAuthenticated()" class="nav-item">
+            <a th:href="@{/recipe/list}" href="#" class="nav-link active">Recipes</a>
+          </li>
+          <li>
+            <a th:href="@{/user/list}" href="#" class="nav-link active">Recipe Collection</a>
+          </li>
+          <li>
+            <a th:href="@{/home/about}" href="#" class="nav-link active">About</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- col 3 -->
+      <div class="col-1">
+        <form th:action="@{/logout}" method="post" class="ps-4 fix-login-btn">
+          <button sec:authorize="isAnonymous()" th:href="@{/login}" type="submit" class="btn btn-outline-light">Login</button>
+          <button sec:authorize="isAuthenticated()" type="submit" class="btn btn-outline-light">Logout</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</nav>
+</body>
+
+</html>

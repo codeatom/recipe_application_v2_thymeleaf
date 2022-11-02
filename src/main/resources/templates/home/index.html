@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col">
+                <a href="#" class="btn btn-link:hover link-primary" th:href="@{/user/list}">
+                    <span class="d-none d-md-inline">Go To Recipe Collection</span>
+                </a>
+            </div>
+        </div><hr>
+
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <div class="row">
+            <div class="col">
+                <a href="#" class="btn btn-link:hover link-primary" th:href="@{/login}">
+                    <span class="d-none d-md-inline">Join our community</span>
+                </a>
+            </div>
+        </div><hr>
+
+    </div>
+</div>
+</body>
+</html>

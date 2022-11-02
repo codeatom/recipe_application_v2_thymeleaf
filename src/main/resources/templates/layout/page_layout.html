@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document Title</title>
+
+    <!-- Fontawesome icon library Resource -->
+    <link rel="stylesheet" th:href="@{/webjars/fortawesome__fontawesome-free/css/all.css}">
+
+    <!-- Bootstrap Webjar Resource -->
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css} "/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.js}"></script>
+
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+
+    <link href="../images/favicon.png" rel="icon">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav th:insert="fragment/nav :: nav_fragment"></nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" layout:fragment="main-content">
+            <!-- Main content -->
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <footer th:insert="fragment/footer :: footer_fragment"></footer>
+        </div>
+    </div>
+</body>
+
+</html>

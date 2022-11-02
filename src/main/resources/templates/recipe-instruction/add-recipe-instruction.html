@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <header class="mt-5 pt-5">
+          <h2>
+            <span th:text="#{recipeInstruction.add}">Adding RecipeInstruction</span>
+          </h2>
+        </header>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9">
+        <div class="card mb-3 card-width">
+          <div class="card-body ">
+
+              <form th:action="@{/recipe-instruction/add}" th:object="${recipeInstruction}" method="post">
+                <div class="form-group">
+                  <label for="title"><h5>Title :</h5></label>
+                  <input th:field="*{title}" id="title" name="title" type="text" placeholder="Enter title" class="form-control"/>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('title')}" th:errors="*{title}" th:errorclass="error">validation message</p>
+                </div>
+                <div class="form-group">
+                  <label for="instruction"><h5>Instruction :</h5></label>
+                  <input th:field="*{instruction}" id="instruction" name="instruction" type="text" placeholder="Enter instruction" class="form-control"/>
+                  <p class="mt-1 alert alert-danger text-muted" th:if="${#fields.hasErrors('instruction')}" th:errors="*{instruction}" th:errorclass="error">validation message</p>
+                </div>
+
+                <div>
+                  <button type="submit" class="btn btn-primary mt-3">
+                    <i class="fa-solid fa-check"></i>
+                    <span class="d-none d-md-inline">Add</span>
+                  </button>
+                  <button type="reset" class="btn btn-warning mt-3">
+                    <i class="fa-solid fa-arrow-rotate-left"></i>
+                    <span class="d-none d-md-inline">Reset</span>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+
+        <a href="#" class="btn btn-outline-primary mt-2" th:href="@{/recipe-instruction/list}">
+          <i class="fa fa-times"></i>
+          <span class="d-none d-md-inline">Cancel</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+
+</html>

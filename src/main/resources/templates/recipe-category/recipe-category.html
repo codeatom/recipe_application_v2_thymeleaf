@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h4>Recipe Category</h4>
+                    </div>
+
+                    <div th:if="${recipeCategory eq null}">
+                        Data not found
+                    </div>
+
+                    <div th:unless="${recipeCategory eq null}" class="card-body">
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Id :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeCategory.id}"></span>
+                            </div>
+                        </div>
+                        <div class="d-md-flex flex-row mb-3">
+                            <div class="col-md-2 bg-light shadow-sm" >
+                                <span><h5>Category :</h5></span>
+                            </div>
+                            <div class="col-md-10 border border-light shadow-sm">
+                                <span th:text="${recipeCategory.category}"></span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-link:hover link-success mt-3" th:href="@{/recipe-category/add-recipe/{id} (id=${recipeCategory.id})}">
+                                <i class="fas fa-plus"></i>
+                                <span class="d-none d-md-inline">Add Recipe</span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="#" class="btn btn-outline-info mt-3" th:href="@{/recipe-category/update/{id} (id=${recipeCategory.id})}">
+                                <i class="fas fa-pen-to-square"></i>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </a>
+                            <a href="#" class="btn btn-outline-primary mt-3" th:href="@{/recipe-category/list}">
+                                <i class="fa fa-arrow-left"></i>
+                                <span class="d-none d-md-inline">Back</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col">
+                <p>Category info</p>
+
+                <table class="table table-hover mt-3">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Recipe</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:if="${recipeCategory}">
+                        <td colspan="4">No Record Available</td>
+                    </tr>
+
+                    <tr th:unless="${recipeCategory == null}" th:each="recipe, iter : ${recipeCategory.getRecipes()}">
+                        <th scope="row" th:text="${iter.index+1}"> 1 </th>
+                        <td th:text="${recipe.recipeName}"></td>
+                        <td>
+                            <a href="#" class="btn btn-link:hover link-danger" th:href="@{/recipe-category/remove-recipe/{id}/{id2} (id=${recipeCategory.id}, id2=${recipe.id})}">
+                                <i class="fas fa-trash"></i>
+                                <span class="d-none d-md-inline">Remove</span>
+                            </a>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+</body>
+</html>

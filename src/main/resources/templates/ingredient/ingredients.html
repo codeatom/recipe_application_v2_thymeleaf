@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/page_layout}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe App</title>
+</head>
+
+<body>
+<div layout:fragment="main-content">
+<div class="container">
+
+    <!--  outer row 1 -->
+    <div class="row">
+        <div class="col-6">
+            <header align="center" class="pt-5">
+                <h2>
+                    <span th:text="#{ingredients.header}">Ingredient</span>
+                </h2>
+            </header>
+        </div>
+        <div class="col-4">
+            <header align="center" class="pt-5">
+                <h2>
+                    <span th:text="#{ingredient.info}">info</span>
+                </h2>
+            </header>
+        </div>
+        <div class="col-2">
+            <form th:action="@{/ingredient/search}" class="d-flex dark pt-3" role="search">
+                <input type="text" th:name="search" class="form-control me-2"  placeholder="Search ingredient" aria-label="Search">
+                <button class="btn btn-info" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!--  outer row 2 -->
+    <div class="row">
+        <div class="col">
+            <a th:href="@{/ingredient/add}" href="#" class="btn btn-success" >
+                <i class="fas fa-plus"></i>
+                <span>Add</span>
+            </a>
+        </div>
+    </div>
+
+    <!--  outer row 3 -->
+    <div class="row">
+        <div class="col">
+            <!-- Start of Table -->
+                    <table class="table table-hover mt-3">
+                        <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr th:if="${ingredientList == null || ingredientList.isEmpty()}">
+                            <td colspan="4">No Ingredient Available</td>
+                        </tr>
+
+                        <tr th:unless="${ingredientList == null || ingredientList.isEmpty()}" th:each="ingredient, iter : ${ingredientList}">
+                            <th scope="row" th:text="${iter.index+1}"> 1 </th>
+                            <td th:text="${ingredient.ingredientName}">Water</td>
+                            <td>
+                                <!-- Details link -->
+                                <a href="#" class="btn btn-link:hover link-primary" th:href="@{/ingredient/get/{id} (id=${ingredient.id})}">
+                                    <i class="fas fa-circle-info"></i>
+                                    <span class="d-none d-md-inline">Details</span>
+                                </a>
+
+                                <!--Edit link -->
+                                <a href="#" class="btn btn-link:hover link-info" th:href="@{/ingredient/update/{id} (id=${ingredient.id})}">
+                                    <i class="fas fa-pen-to-square"></i>
+                                    <span class="d-none d-md-inline">Edit</span>
+                                </a>
+
+                                <!--Delete link -->
+                                <a href="#" class="btn btn-link:hover link-danger" th:href="@{/ingredient/delete/request/{id} (id=${ingredient.id})}">
+                                    <i class="fas fa-trash"></i>
+                                    <span class="d-none d-md-inline">Delete</span>
+                                </a>
+
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                <!-- End of Table -->
+                <div>
+                    <h5 class="m-0" th:text="|Total Ingredient: ${ingredientList.size()}|">Total Ingredient: 3</h5>
+                </div>
+        </div>
+
+        <div class="col">
+            <div class="text-center">
+                <p>Picture of ingredients</p>
+                <p>Instruction on ingredients is placed here</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
+</body>
+</html>
